@@ -1,0 +1,3 @@
+defaults write NSGlobalDomain AppleFontSmoothing -integer 0
+flutter test
+defaults delete NSGlobalDomain AppleFontSmoothing
