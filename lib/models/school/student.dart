@@ -9,10 +9,12 @@ class Student with _$Student {
   factory Student({
     required String dataOfBirth,
     required String roomNumber,
-    required String course,
+    required String? course,
     required String specialty,
     required String fullName,
     required String floor,
+    required int? prise,
+    required int? paid,
   }) = _Student;
 
   const Student._();
@@ -27,5 +29,7 @@ class Student with _$Student {
         floor: json.child('Этаж').value.toString(),
         fullName: json.child('ФИО').value.toString(),
         specialty: json.child('Специальность').value.toString(),
+        prise: json.child('Начисление').value as int?,
+        paid: json.child('Оплата').value as int?,
       );
 }

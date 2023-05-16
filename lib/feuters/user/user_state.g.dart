@@ -10,7 +10,11 @@ class _$UserState extends UserState {
   @override
   final String name;
   @override
-  final int id;
+  final String? group;
+  @override
+  final String? course;
+  @override
+  final int? id;
   @override
   final bool isAdmin;
   @override
@@ -20,10 +24,14 @@ class _$UserState extends UserState {
       (new UserStateBuilder()..update(updates))._build();
 
   _$UserState._(
-      {required this.name, required this.id, required this.isAdmin, this.photo})
+      {required this.name,
+      this.group,
+      this.course,
+      this.id,
+      required this.isAdmin,
+      this.photo})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(name, r'UserState', 'name');
-    BuiltValueNullFieldError.checkNotNull(id, r'UserState', 'id');
     BuiltValueNullFieldError.checkNotNull(isAdmin, r'UserState', 'isAdmin');
   }
 
@@ -39,6 +47,8 @@ class _$UserState extends UserState {
     if (identical(other, this)) return true;
     return other is UserState &&
         name == other.name &&
+        group == other.group &&
+        course == other.course &&
         id == other.id &&
         isAdmin == other.isAdmin &&
         photo == other.photo;
@@ -48,6 +58,8 @@ class _$UserState extends UserState {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, group.hashCode);
+    _$hash = $jc(_$hash, course.hashCode);
     _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, isAdmin.hashCode);
     _$hash = $jc(_$hash, photo.hashCode);
@@ -59,6 +71,8 @@ class _$UserState extends UserState {
   String toString() {
     return (newBuiltValueToStringHelper(r'UserState')
           ..add('name', name)
+          ..add('group', group)
+          ..add('course', course)
           ..add('id', id)
           ..add('isAdmin', isAdmin)
           ..add('photo', photo))
@@ -72,6 +86,14 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
   String? _name;
   String? get name => _$this._name;
   set name(String? name) => _$this._name = name;
+
+  String? _group;
+  String? get group => _$this._group;
+  set group(String? group) => _$this._group = group;
+
+  String? _course;
+  String? get course => _$this._course;
+  set course(String? course) => _$this._course = course;
 
   int? _id;
   int? get id => _$this._id;
@@ -91,6 +113,8 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
     final $v = _$v;
     if ($v != null) {
       _name = $v.name;
+      _group = $v.group;
+      _course = $v.course;
       _id = $v.id;
       _isAdmin = $v.isAdmin;
       _photo = $v.photo;
@@ -118,7 +142,9 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
         new _$UserState._(
             name: BuiltValueNullFieldError.checkNotNull(
                 name, r'UserState', 'name'),
-            id: BuiltValueNullFieldError.checkNotNull(id, r'UserState', 'id'),
+            group: group,
+            course: course,
+            id: id,
             isAdmin: BuiltValueNullFieldError.checkNotNull(
                 isAdmin, r'UserState', 'isAdmin'),
             photo: photo);

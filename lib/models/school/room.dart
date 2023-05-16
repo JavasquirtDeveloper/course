@@ -10,6 +10,7 @@ class Room with _$Room {
     required String roomNumber,
     required String freeBeds,
     required String busyBeds,
+    required String placeCount,
   }) = _Room;
 
   const Room._();
@@ -18,11 +19,13 @@ class Room with _$Room {
         roomNumber: json['Комната'],
         freeBeds: json['Кроватей занято'],
         busyBeds: json['Кроватей свободно'],
+        placeCount: json['количество мест'],
       );
 
   factory Room.fromSnapshot(DataSnapshot json) => Room(
         roomNumber: json.child('Комната').value.toString(),
         freeBeds: json.child('Кроватей занято').value.toString(),
         busyBeds: json.child('Кроватей свободно').value.toString(),
+        placeCount: json.child('количество мест').value.toString(),
       );
 }

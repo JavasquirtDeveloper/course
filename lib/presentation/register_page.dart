@@ -2,7 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app_router.dart';
 import 'package:flutter_application_1/feuters/user/actions/get_user_id_action.dart';
-import 'package:flutter_application_1/feuters/user/actions/login_action.dart';
+import 'package:flutter_application_1/feuters/user/actions/sign_action.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/presentation/hooks/dispatcher_hook.dart';
 import 'package:flutter_application_1/presentation/main_page.dart';
@@ -17,12 +17,15 @@ class RegisterPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final database = FirebaseDatabase.instance.ref('users');
-    final userId = useGlobalState((s) => s.user.id);
+    final userId = useGlobalState((s) => s.user.id ?? 0);
     final isStudent = useState(false);
+    final isPersonalInfo = useState(false);
     final dispatcher = useDispatcher();
     final loginController = useTextEditingController();
     final passController = useTextEditingController();
     final nameController = useTextEditingController();
+    final groupController = useTextEditingController();
+    final courseController = useTextEditingController();
     final loginFocus = useFocusNode();
     final passFocus = useFocusNode();
     final loginText = useState('');
@@ -45,12 +48,19 @@ class RegisterPage extends HookWidget {
           .child('/$userId')
           .set({
             'login': loginController.text,
+            'id': userId,
             'pass': passController.text,
             'is_student': isStudent.value,
             'name': nameController.text,
+            'group': isStudent.value ? groupController.text : null,
+            'course': isStudent.value ? courseController.text : null,
+            'personal_info': isPersonalInfo.value,
           })
-          .then((value) => dispatcher(LoginAction(
-              isStudent: isStudent.value, fullName: nameController.text)))
+          .then((value) => dispatcher(SignAction(
+              isStudent: isStudent.value,
+              fullName: nameController.text,
+              group: groupController.text,
+              course: courseController.text)))
           .then((value) => appRouter.startWith(const MainPage()));
     }
 
@@ -89,6 +99,24 @@ class RegisterPage extends HookWidget {
               value: isStudent.value,
               onChange: (v) => isStudent.value = v ?? false,
             ),
+            TextWithBox(
+              text: 'Согласие на обработку персональных данных',
+              value: isPersonalInfo.value,
+              onChange: (v) => isPersonalInfo.value = v ?? false,
+            ),
+            if (isStudent.value) ...[
+              const SizedBox(height: 10),
+              SearchInputField(
+                controller: groupController,
+                hint: 'Группа',
+              ),
+              const SizedBox(height: 10),
+              SearchInputField(
+                controller: courseController,
+                hint: 'Курс',
+              ),
+              const SizedBox(height: 10),
+            ],
             Center(
                 child: DefaultButton(
                     text: 'Зарегистрироваться',

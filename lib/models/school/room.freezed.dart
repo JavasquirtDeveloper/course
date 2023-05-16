@@ -23,6 +23,7 @@ mixin _$Room {
   String get roomNumber => throw _privateConstructorUsedError;
   String get freeBeds => throw _privateConstructorUsedError;
   String get busyBeds => throw _privateConstructorUsedError;
+  String get placeCount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,8 @@ abstract class $RoomCopyWith<$Res> {
   factory $RoomCopyWith(Room value, $Res Function(Room) then) =
       _$RoomCopyWithImpl<$Res, Room>;
   @useResult
-  $Res call({String roomNumber, String freeBeds, String busyBeds});
+  $Res call(
+      {String roomNumber, String freeBeds, String busyBeds, String placeCount});
 }
 
 /// @nodoc
@@ -53,6 +55,7 @@ class _$RoomCopyWithImpl<$Res, $Val extends Room>
     Object? roomNumber = null,
     Object? freeBeds = null,
     Object? busyBeds = null,
+    Object? placeCount = null,
   }) {
     return _then(_value.copyWith(
       roomNumber: null == roomNumber
@@ -67,6 +70,10 @@ class _$RoomCopyWithImpl<$Res, $Val extends Room>
           ? _value.busyBeds
           : busyBeds // ignore: cast_nullable_to_non_nullable
               as String,
+      placeCount: null == placeCount
+          ? _value.placeCount
+          : placeCount // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -77,7 +84,8 @@ abstract class _$$_RoomCopyWith<$Res> implements $RoomCopyWith<$Res> {
       __$$_RoomCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String roomNumber, String freeBeds, String busyBeds});
+  $Res call(
+      {String roomNumber, String freeBeds, String busyBeds, String placeCount});
 }
 
 /// @nodoc
@@ -92,6 +100,7 @@ class __$$_RoomCopyWithImpl<$Res> extends _$RoomCopyWithImpl<$Res, _$_Room>
     Object? roomNumber = null,
     Object? freeBeds = null,
     Object? busyBeds = null,
+    Object? placeCount = null,
   }) {
     return _then(_$_Room(
       roomNumber: null == roomNumber
@@ -106,6 +115,10 @@ class __$$_RoomCopyWithImpl<$Res> extends _$RoomCopyWithImpl<$Res, _$_Room>
           ? _value.busyBeds
           : busyBeds // ignore: cast_nullable_to_non_nullable
               as String,
+      placeCount: null == placeCount
+          ? _value.placeCount
+          : placeCount // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -116,7 +129,8 @@ class _$_Room extends _Room {
   _$_Room(
       {required this.roomNumber,
       required this.freeBeds,
-      required this.busyBeds})
+      required this.busyBeds,
+      required this.placeCount})
       : super._();
 
   factory _$_Room.fromJson(Map<String, dynamic> json) => _$$_RoomFromJson(json);
@@ -127,10 +141,12 @@ class _$_Room extends _Room {
   final String freeBeds;
   @override
   final String busyBeds;
+  @override
+  final String placeCount;
 
   @override
   String toString() {
-    return 'Room(roomNumber: $roomNumber, freeBeds: $freeBeds, busyBeds: $busyBeds)';
+    return 'Room(roomNumber: $roomNumber, freeBeds: $freeBeds, busyBeds: $busyBeds, placeCount: $placeCount)';
   }
 
   @override
@@ -143,12 +159,15 @@ class _$_Room extends _Room {
             (identical(other.freeBeds, freeBeds) ||
                 other.freeBeds == freeBeds) &&
             (identical(other.busyBeds, busyBeds) ||
-                other.busyBeds == busyBeds));
+                other.busyBeds == busyBeds) &&
+            (identical(other.placeCount, placeCount) ||
+                other.placeCount == placeCount));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, roomNumber, freeBeds, busyBeds);
+  int get hashCode =>
+      Object.hash(runtimeType, roomNumber, freeBeds, busyBeds, placeCount);
 
   @JsonKey(ignore: true)
   @override
@@ -168,7 +187,8 @@ abstract class _Room extends Room {
   factory _Room(
       {required final String roomNumber,
       required final String freeBeds,
-      required final String busyBeds}) = _$_Room;
+      required final String busyBeds,
+      required final String placeCount}) = _$_Room;
   _Room._() : super._();
 
   factory _Room.fromJson(Map<String, dynamic> json) = _$_Room.fromJson;
@@ -179,6 +199,8 @@ abstract class _Room extends Room {
   String get freeBeds;
   @override
   String get busyBeds;
+  @override
+  String get placeCount;
   @override
   @JsonKey(ignore: true)
   _$$_RoomCopyWith<_$_Room> get copyWith => throw _privateConstructorUsedError;

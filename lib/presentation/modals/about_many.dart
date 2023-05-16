@@ -1,7 +1,11 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app_router.dart';
+import 'package:flutter_application_1/models/school/student.dart';
 import 'package:flutter_application_1/widgets/default_button.dart';
 import 'package:flutter_application_1/widgets/input.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 class AboutMany extends StatelessWidget {
   const AboutMany({super.key});
@@ -19,11 +23,15 @@ class AboutMany extends StatelessWidget {
   }
 }
 
-class AboutManyForTeacher extends StatelessWidget {
+class AboutManyForTeacher extends HookWidget {
   const AboutManyForTeacher({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final database = FirebaseDatabase.instance.ref('student');
+    final searchString = useState('');
+
+    const separator = SizedBox(height: 8);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 34),
       child: Column(
@@ -49,18 +57,65 @@ class AboutManyForTeacher extends StatelessWidget {
           const SizedBox(height: 40),
           const Text('Поиск по студенту:'),
           const SizedBox(height: 10),
-          const SearchInputField(hint: 'ФИО/группа/комната'),
-          const SizedBox(height: 40),
-          Container(
-            color: Colors.yellow,
-            width: double.infinity,
-            child: Column(children: const [
-              Text('ФИО'),
-              SizedBox(height: 10),
-              Text('Оплачено: 2000'),
-              SizedBox(height: 10),
-              Text('Долг: 0'),
-            ]),
+          Flexible(
+            child: Container(
+                color: Colors.pink,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 10),
+                      SearchInputField(
+                        hint: 'ФИО, группа, номер комнаты',
+                        onChanged: (v) => searchString.value = v.toLowerCase(),
+                      ),
+                      const SizedBox(height: 20),
+                      Expanded(
+                        child: Container(
+                            color: Colors.white,
+                            child: FirebaseAnimatedList(
+                                query: database,
+                                itemBuilder:
+                                    (context, snapshot, animation, index) {
+                                  final json = snapshot;
+                                  final student = Student.fromSnapshot(json);
+                                  final debt = (student.prise ?? 0) -
+                                      (student.paid ?? 0);
+
+                                  return (student.fullName
+                                              .toLowerCase()
+                                              .contains(searchString.value) ||
+                                          student.roomNumber
+                                              .contains(searchString.value))
+                                      ? Column(
+                                          children: [
+                                            separator,
+                                            Text(' ${student.fullName}'),
+                                            separator,
+                                            Text(
+                                                'Номер комнаты: ${student.roomNumber}'),
+                                            separator,
+                                            Text(
+                                                '${student.course ?? '1'} курс'),
+                                            separator,
+                                            Text(
+                                                '${student.dataOfBirth} года рождения'),
+                                            separator,
+                                            Text(
+                                                'Специальность ${student.specialty}'),
+                                            separator,
+                                            Text(
+                                                'Долг: ${debt <= 0 ? 'Оплачено' : debt} '),
+                                            const Divider(height: 3)
+                                          ],
+                                        )
+                                      : const SizedBox();
+                                })),
+                      ),
+                      const SizedBox(height: 50),
+                    ],
+                  ),
+                )),
           ),
         ],
       ),
@@ -75,34 +130,74 @@ class AboutRooms extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 34),
-      children: [
-        const Text('1 курс:'),
-        DefaultButton(text: 'БАТ', onPressed: () {}),
-        DefaultButton(text: 'БУС', onPressed: () {}),
-        DefaultButton(text: 'БМА', onPressed: () {}),
-        DefaultButton(text: 'ББПэ', onPressed: () {}),
-        DefaultButton(text: 'БТС', onPressed: () {}),
-        const SizedBox(height: 30),
-        const Text('2 курс:'),
-        DefaultButton(text: 'БАТ', onPressed: () {}),
-        DefaultButton(text: 'БУС', onPressed: () {}),
-        DefaultButton(text: 'БМА', onPressed: () {}),
-        DefaultButton(text: 'ББПэ', onPressed: () {}),
-        DefaultButton(text: 'БТС', onPressed: () {}),
-        const SizedBox(height: 30),
-        const Text('3 курс:'),
-        DefaultButton(text: 'БАТ', onPressed: () {}),
-        DefaultButton(text: 'БУС', onPressed: () {}),
-        DefaultButton(text: 'БМА', onPressed: () {}),
-        DefaultButton(text: 'ББПэ', onPressed: () {}),
-        DefaultButton(text: 'БТС', onPressed: () {}),
-        const SizedBox(height: 30),
-        const Text('4 курс:'),
-        DefaultButton(text: 'БАТ', onPressed: () {}),
-        DefaultButton(text: 'БУС', onPressed: () {}),
-        DefaultButton(text: 'БМА', onPressed: () {}),
-        DefaultButton(text: 'ББПэ', onPressed: () {}),
-        DefaultButton(text: 'БТС', onPressed: () {}),
+      children: const [
+        Text('1 курс:'),
+        ExpansionTile(
+          title: Text('БАТ'),
+        ),
+        ExpansionTile(
+          title: Text('БУС'),
+        ),
+        ExpansionTile(
+          title: Text('БМА'),
+        ),
+        ExpansionTile(
+          title: Text('ББПэ'),
+        ),
+        ExpansionTile(
+          title: Text('БТС'),
+        ),
+        SizedBox(height: 30),
+        Text('2 курс:'),
+        ExpansionTile(
+          title: Text('БАТ'),
+        ),
+        ExpansionTile(
+          title: Text('БУС'),
+        ),
+        ExpansionTile(
+          title: Text('БМА'),
+        ),
+        ExpansionTile(
+          title: Text('ББПэ'),
+        ),
+        ExpansionTile(
+          title: Text('БТС'),
+        ),
+        SizedBox(height: 30),
+        Text('3 курс:'),
+        ExpansionTile(
+          title: Text('БАТ'),
+        ),
+        ExpansionTile(
+          title: Text('БУС'),
+        ),
+        ExpansionTile(
+          title: Text('БМА'),
+        ),
+        ExpansionTile(
+          title: Text('ББПэ'),
+        ),
+        ExpansionTile(
+          title: Text('БТС'),
+        ),
+        SizedBox(height: 30),
+        Text('4 курс:'),
+        ExpansionTile(
+          title: Text('БАТ'),
+        ),
+        ExpansionTile(
+          title: Text('БУС'),
+        ),
+        ExpansionTile(
+          title: Text('БМА'),
+        ),
+        ExpansionTile(
+          title: Text('ББПэ'),
+        ),
+        ExpansionTile(
+          title: Text('БТС'),
+        ),
       ],
     );
   }

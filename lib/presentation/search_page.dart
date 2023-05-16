@@ -36,6 +36,8 @@ class SearchPage extends HookWidget {
                           itemBuilder: (context, snapshot, animation, index) {
                             final json = snapshot;
                             final student = Student.fromSnapshot(json);
+                            final debt =
+                                (student.prise ?? 0) - (student.paid ?? 0);
 
                             return (student.fullName
                                         .toLowerCase()
@@ -50,13 +52,16 @@ class SearchPage extends HookWidget {
                                       Text(
                                           'Номер комнаты: ${student.roomNumber}'),
                                       separator,
-                                      Text('${student.course} курс'),
+                                      Text('${student.course ?? '1'} курс'),
                                       separator,
                                       Text(
                                           '${student.dataOfBirth} года рождения'),
                                       separator,
                                       Text(
                                           'Специальность ${student.specialty}'),
+                                      separator,
+                                      Text(
+                                          'Долг: ${debt <= 0 ? 'Оплачено' : debt} '),
                                       const Divider(height: 3)
                                     ],
                                   )

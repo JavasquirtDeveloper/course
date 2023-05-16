@@ -22,10 +22,12 @@ Student _$StudentFromJson(Map<String, dynamic> json) {
 mixin _$Student {
   String get dataOfBirth => throw _privateConstructorUsedError;
   String get roomNumber => throw _privateConstructorUsedError;
-  String get course => throw _privateConstructorUsedError;
+  String? get course => throw _privateConstructorUsedError;
   String get specialty => throw _privateConstructorUsedError;
   String get fullName => throw _privateConstructorUsedError;
   String get floor => throw _privateConstructorUsedError;
+  int? get prise => throw _privateConstructorUsedError;
+  int? get paid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,10 +42,12 @@ abstract class $StudentCopyWith<$Res> {
   $Res call(
       {String dataOfBirth,
       String roomNumber,
-      String course,
+      String? course,
       String specialty,
       String fullName,
-      String floor});
+      String floor,
+      int? prise,
+      int? paid});
 }
 
 /// @nodoc
@@ -61,10 +65,12 @@ class _$StudentCopyWithImpl<$Res, $Val extends Student>
   $Res call({
     Object? dataOfBirth = null,
     Object? roomNumber = null,
-    Object? course = null,
+    Object? course = freezed,
     Object? specialty = null,
     Object? fullName = null,
     Object? floor = null,
+    Object? prise = freezed,
+    Object? paid = freezed,
   }) {
     return _then(_value.copyWith(
       dataOfBirth: null == dataOfBirth
@@ -75,10 +81,10 @@ class _$StudentCopyWithImpl<$Res, $Val extends Student>
           ? _value.roomNumber
           : roomNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      course: null == course
+      course: freezed == course
           ? _value.course
           : course // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       specialty: null == specialty
           ? _value.specialty
           : specialty // ignore: cast_nullable_to_non_nullable
@@ -91,6 +97,14 @@ class _$StudentCopyWithImpl<$Res, $Val extends Student>
           ? _value.floor
           : floor // ignore: cast_nullable_to_non_nullable
               as String,
+      prise: freezed == prise
+          ? _value.prise
+          : prise // ignore: cast_nullable_to_non_nullable
+              as int?,
+      paid: freezed == paid
+          ? _value.paid
+          : paid // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -105,10 +119,12 @@ abstract class _$$_StudentCopyWith<$Res> implements $StudentCopyWith<$Res> {
   $Res call(
       {String dataOfBirth,
       String roomNumber,
-      String course,
+      String? course,
       String specialty,
       String fullName,
-      String floor});
+      String floor,
+      int? prise,
+      int? paid});
 }
 
 /// @nodoc
@@ -123,10 +139,12 @@ class __$$_StudentCopyWithImpl<$Res>
   $Res call({
     Object? dataOfBirth = null,
     Object? roomNumber = null,
-    Object? course = null,
+    Object? course = freezed,
     Object? specialty = null,
     Object? fullName = null,
     Object? floor = null,
+    Object? prise = freezed,
+    Object? paid = freezed,
   }) {
     return _then(_$_Student(
       dataOfBirth: null == dataOfBirth
@@ -137,10 +155,10 @@ class __$$_StudentCopyWithImpl<$Res>
           ? _value.roomNumber
           : roomNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      course: null == course
+      course: freezed == course
           ? _value.course
           : course // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       specialty: null == specialty
           ? _value.specialty
           : specialty // ignore: cast_nullable_to_non_nullable
@@ -153,6 +171,14 @@ class __$$_StudentCopyWithImpl<$Res>
           ? _value.floor
           : floor // ignore: cast_nullable_to_non_nullable
               as String,
+      prise: freezed == prise
+          ? _value.prise
+          : prise // ignore: cast_nullable_to_non_nullable
+              as int?,
+      paid: freezed == paid
+          ? _value.paid
+          : paid // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -166,7 +192,9 @@ class _$_Student extends _Student {
       required this.course,
       required this.specialty,
       required this.fullName,
-      required this.floor})
+      required this.floor,
+      required this.prise,
+      required this.paid})
       : super._();
 
   factory _$_Student.fromJson(Map<String, dynamic> json) =>
@@ -177,17 +205,21 @@ class _$_Student extends _Student {
   @override
   final String roomNumber;
   @override
-  final String course;
+  final String? course;
   @override
   final String specialty;
   @override
   final String fullName;
   @override
   final String floor;
+  @override
+  final int? prise;
+  @override
+  final int? paid;
 
   @override
   String toString() {
-    return 'Student(dataOfBirth: $dataOfBirth, roomNumber: $roomNumber, course: $course, specialty: $specialty, fullName: $fullName, floor: $floor)';
+    return 'Student(dataOfBirth: $dataOfBirth, roomNumber: $roomNumber, course: $course, specialty: $specialty, fullName: $fullName, floor: $floor, prise: $prise, paid: $paid)';
   }
 
   @override
@@ -204,13 +236,15 @@ class _$_Student extends _Student {
                 other.specialty == specialty) &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
-            (identical(other.floor, floor) || other.floor == floor));
+            (identical(other.floor, floor) || other.floor == floor) &&
+            (identical(other.prise, prise) || other.prise == prise) &&
+            (identical(other.paid, paid) || other.paid == paid));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, dataOfBirth, roomNumber, course, specialty, fullName, floor);
+  int get hashCode => Object.hash(runtimeType, dataOfBirth, roomNumber, course,
+      specialty, fullName, floor, prise, paid);
 
   @JsonKey(ignore: true)
   @override
@@ -230,10 +264,12 @@ abstract class _Student extends Student {
   factory _Student(
       {required final String dataOfBirth,
       required final String roomNumber,
-      required final String course,
+      required final String? course,
       required final String specialty,
       required final String fullName,
-      required final String floor}) = _$_Student;
+      required final String floor,
+      required final int? prise,
+      required final int? paid}) = _$_Student;
   _Student._() : super._();
 
   factory _Student.fromJson(Map<String, dynamic> json) = _$_Student.fromJson;
@@ -243,13 +279,17 @@ abstract class _Student extends Student {
   @override
   String get roomNumber;
   @override
-  String get course;
+  String? get course;
   @override
   String get specialty;
   @override
   String get fullName;
   @override
   String get floor;
+  @override
+  int? get prise;
+  @override
+  int? get paid;
   @override
   @JsonKey(ignore: true)
   _$$_StudentCopyWith<_$_Student> get copyWith =>

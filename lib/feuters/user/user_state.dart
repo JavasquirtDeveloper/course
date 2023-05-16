@@ -12,14 +12,18 @@ abstract class UserState implements Built<UserState, UserStateBuilder> {
   UserState._();
 
   String get name;
-  int get id;
+  String? get group;
+  String? get course;
+  int? get id;
   bool get isAdmin;
   File? get photo;
 
   static UserState initial() => UserState(
         (b) => b
-          ..name = 'Alex'
-          ..id = 0
+          ..name = ''
+          ..group = ''
+          ..course = ''
+          ..id = null
           ..photo = null
           ..isAdmin = false,
       );

@@ -33,7 +33,8 @@ class MenuPage extends HookWidget {
                       child: Text('Нет фото'),
                     ),
               const SizedBox(height: 30),
-              Center(child: Text(user.name)),
+              Center(
+                  child: Text('${user.name} ' '${user.group } ''${user.course}')),
               const SizedBox(height: 30),
               DefaultButton(
                 text: 'Информация об общежитии',
