@@ -1,20 +1,14 @@
 import 'dart:async';
 
 import 'package:async_redux/async_redux.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/feuters/user/actions/login_action.dart';
-import 'package:flutter_application_1/models/user/user.dart';
-import 'package:flutter_application_1/presentation/hooks/dispatcher_hook.dart';
 import 'package:flutter_application_1/presentation/login_page.dart';
 import 'package:flutter_application_1/presentation/main_page.dart';
-import 'package:flutter_application_1/presentation/register_page.dart';
 import 'package:flutter_application_1/store/app_state.dart';
 import 'package:flutter_application_1/store/store.dart';
 import 'package:flutter_application_1/theme/theme_provider.dart';
-import 'package:flutter_application_1/widgets/default_button.dart';
-import 'package:flutter_application_1/widgets/input.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
@@ -48,19 +42,24 @@ class MyApp extends HookWidget {
       builder: (context, _) {
         final themeProvider = Provider.of<ThemeProvider>(context);
         return MaterialApp(
-          title: 'Flutter Demo',
-          themeMode: themeProvider.themeMode,
-          theme: ThemeData.light(),
-          navigatorKey: appRouter.navigatorKey,
-          darkTheme: ThemeData.dark(),
-          home: const LoginPage(),
-        );
+            title: 'Flutter Demo',
+            themeMode: themeProvider.themeMode,
+            theme: ThemeData.light(),
+            navigatorKey: appRouter.navigatorKey,
+            darkTheme: ThemeData.dark(),
+            home: StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return const MainPage();
+                }
+                return const LoginPage();
+              },
+            ));
       },
     );
   }
 }
-
-
 
 class TextWithBox extends StatelessWidget {
   const TextWithBox({

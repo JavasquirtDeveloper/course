@@ -1,6 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/feuters/user/actions/login_action.dart';
+import 'package:flutter_application_1/models/school/student.dart';
 import 'package:flutter_application_1/presentation/calendar_page.dart';
 import 'package:flutter_application_1/presentation/home_page.dart';
+import 'package:flutter_application_1/presentation/hooks/dispatcher_hook.dart';
 import 'package:flutter_application_1/presentation/menu_page.dart';
 import 'package:flutter_application_1/presentation/search_page.dart';
 import 'package:flutter_application_1/store/global_state_hook.dart';
@@ -11,10 +16,32 @@ class MainPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dispatcher = useDispatcher();
     final isAdmin = useGlobalState((s) => s.user.isAdmin);
+    final user = FirebaseAuth.instance.currentUser;
+    final database =
+        FirebaseDatabase.instance.ref('users').child(user?.uid ?? '');
+
+    Future getUser() async {
+      final user = await database.onValue.first;
+      final getStudents = await FirebaseDatabase.instance.ref('student').get();
+      final students =
+          getStudents.children.map((e) => Student.fromSnapshot(e)).toList();
+
+      dispatcher(LoginAction(user: user.snapshot, students: students));
+    }
+
+    useEffect(
+      () {
+        getUser();
+
+        return null;
+      },
+      [],
+    );
+
     final index = useState(0);
     final tabs = [
-      const HomePage(),
       const CalendarPage(),
       const SearchPage(),
       const MenuPage()
@@ -27,12 +54,11 @@ class MainPage extends HookWidget {
       ),
       bottomNavigationBar: BottomAppBar(
         child: Row(children: [
-          BarIcon(icon: Icons.home, onTap: () => index.value = 0),
-          BarIcon(icon: Icons.calendar_month, onTap: () => index.value = 1),
+          BarIcon(icon: Icons.calendar_month, onTap: () => index.value = 0),
           isAdmin
-              ? BarIcon(icon: Icons.search, onTap: () => index.value = 2)
+              ? BarIcon(icon: Icons.search, onTap: () => index.value = 1)
               : const SizedBox(),
-          BarIcon(icon: Icons.menu, onTap: () => index.value = 3),
+          BarIcon(icon: Icons.menu, onTap: () => index.value = 2),
         ]),
       ),
     );

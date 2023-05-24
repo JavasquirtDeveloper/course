@@ -3,21 +3,26 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app_router.dart';
 import 'package:flutter_application_1/models/school/student.dart';
+import 'package:flutter_application_1/store/global_state_hook.dart';
 import 'package:flutter_application_1/widgets/default_button.dart';
 import 'package:flutter_application_1/widgets/input.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class AboutMany extends StatelessWidget {
+class AboutMany extends HookWidget {
   const AboutMany({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = useGlobalState((s) => s.user);
+    final debt = (user.prise ?? 0) - (user.paid ?? 0);
+
     return Column(
-      children: const [
-        Text('Оплачено: 2000 рублей'),
-        SizedBox(height: 10),
-        Text('Долг по оплате: 0 рублей'),
-        SizedBox(height: 20),
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text('${user.paid}'),
+        const SizedBox(height: 10),
+        Text('$debt'),
+        const SizedBox(height: 20),
       ],
     );
   }

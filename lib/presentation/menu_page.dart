@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app_router.dart';
 import 'package:flutter_application_1/presentation/modals/about_many.dart';
 import 'package:flutter_application_1/presentation/modals/about_sharaga.dart';
+import 'package:flutter_application_1/presentation/modals/bid_modal.dart';
 import 'package:flutter_application_1/presentation/modals/settings_modal.dart';
 import 'package:flutter_application_1/store/global_state_hook.dart';
 import 'package:flutter_application_1/widgets/default_button.dart';
@@ -13,6 +14,12 @@ class MenuPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final user = useGlobalState((s) => s.user);
+
+    final userName = user.isAdmin
+        ? user.name
+        : '${user.name} '
+            '${user.group} '
+            '${user.course}';
 
     return Scaffold(
       body: Container(
@@ -33,8 +40,7 @@ class MenuPage extends HookWidget {
                       child: Text('Нет фото'),
                     ),
               const SizedBox(height: 30),
-              Center(
-                  child: Text('${user.name} ' '${user.group } ''${user.course}')),
+              Center(child: Text(userName)),
               const SizedBox(height: 30),
               DefaultButton(
                 text: 'Информация об общежитии',
@@ -43,7 +49,10 @@ class MenuPage extends HookWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: const [
-                        Text('Проживает: 228 учеников'),
+                        Text('''
+г. Стерлитамак, ул. Курчатова, 14А 
+Номер телефона: +7 (3473) 24-25-07 
+Проживает студентов: 189'''),
                         SizedBox(height: 30),
                       ],
                     )),
@@ -62,6 +71,14 @@ class MenuPage extends HookWidget {
                   child: user.isAdmin
                       ? const AboutManyForTeacher()
                       : const AboutMany(),
+                ),
+              ),
+              const SizedBox(height: 15),
+              DefaultButton(
+                text: user.isAdmin ? 'Заявки' : 'Заявка',
+                onPressed: () => appRouter.openBottomSheet(
+                  context: context,
+                  child: BidModal(user.isAdmin),
                 ),
               ),
               const SizedBox(height: 15),

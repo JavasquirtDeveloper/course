@@ -1,11 +1,10 @@
-import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app_router.dart';
-import 'package:flutter_application_1/feuters/user/actions/login_action.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/models/user/user.dart';
 import 'package:flutter_application_1/presentation/hooks/dispatcher_hook.dart';
 import 'package:flutter_application_1/presentation/main_page.dart';
+import 'package:flutter_application_1/presentation/register_page.dart';
 import 'package:flutter_application_1/widgets/default_button.dart';
 import 'package:flutter_application_1/widgets/input.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -16,29 +15,11 @@ class LoginPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final dispatcher = useDispatcher();
-    final database = FirebaseDatabase.instance.ref('users');
-    users() async {
-      final getUsers = await database.onValue
-          .map((event) => User.fromSnapshot(event.snapshot))
-          .toList();
-
-      print(getUsers);
-    }
-
-    useEffect(
-      () {
-        users();
-        return null;
-      },
-      [],
-    );
 
     final isPersonalInfo = useState(false);
     final isGeolocation = useState(false);
     final loginController = useTextEditingController();
     final passController = useTextEditingController();
-    final isFullInputs = useState(
-        loginController.text.isNotEmpty && passController.text.isNotEmpty);
 
     // Future<void> onAllowGeolocation() async {
     //   isLocationAllowed().then((isAllowed) {
@@ -47,6 +28,24 @@ class LoginPage extends HookWidget {
     //     }
     //   });
     // }
+
+    Future signIn() async {
+      try {
+        await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+              email: loginController.text,
+              password: passController.text,
+            )
+            .then((value) => appRouter.goTo(const MainPage()));
+      } catch (e) {
+        appRouter.openBottomSheet(
+            context: context,
+            child: const Padding(
+              padding: EdgeInsets.all(15),
+              child: Text('Ошибка, проверьте логин или пароль'),
+            ));
+      }
+    }
 
     return Scaffold(
       backgroundColor: Colors.blueGrey,
@@ -59,7 +58,7 @@ class LoginPage extends HookWidget {
             const Text('Login'),
             const SizedBox(height: 10),
             SearchInputField(
-              hint: 'Номер зачетки/номер телефона',
+              hint: 'Email',
               controller: loginController,
             ),
             const SizedBox(height: 10),
@@ -90,17 +89,13 @@ class LoginPage extends HookWidget {
             Center(
                 child: DefaultButton(
               text: 'Регистрация',
-              onPressed: () => users(),
+              onPressed: () => appRouter.goTo(const RegisterPage()),
             )),
             Center(
               child: DefaultButton(
-                  text: 'Войти',
-                  onPressed: () {
-                    dispatcher(LoginAction(
-                      isStudent: false,
-                      fullName: loginController.text,
-                    )).then((value) => appRouter.startWith(const MainPage()));
-                  }),
+                text: 'Войти',
+                onPressed: signIn,
+              ),
             )
           ],
         ),

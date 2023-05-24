@@ -1,7 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app_router.dart';
 import 'package:flutter_application_1/feuters/user/actions/change_photo_action.dart';
-import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/presentation/hooks/dispatcher_hook.dart';
 import 'package:flutter_application_1/presentation/hooks/image_picker_hook.dart';
 import 'package:flutter_application_1/presentation/login_page.dart';
@@ -46,7 +46,11 @@ class SettingsModal extends HookWidget {
         const SizedBox(height: 40),
         DefaultButton(
             text: 'Выйти',
-            onPressed: () => appRouter.startWith(const LoginPage())),
+            onPressed: () {
+              FirebaseAuth.instance
+                  .signOut()
+                  .then((value) => appRouter.startWith(const LoginPage()));
+            }),
         const SizedBox(height: 40),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

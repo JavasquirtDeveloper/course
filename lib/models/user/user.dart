@@ -8,10 +8,17 @@ part 'user.g.dart';
 class User with _$User {
   factory User({
     required String name,
-    required String course,
-    required String group,
+    required String? course,
+    required String? group,
     required bool isStudent,
-    //  int? id,
+    required bool personalInfo,
+    required String id,
+    String? dataOfBirth,
+    String? roomNumber,
+    String? specialty,
+    String? floor,
+    int? prise,
+    int? paid,
   }) = _User;
 
   const User._();
@@ -22,7 +29,8 @@ class User with _$User {
         name: json.child('name').value.toString(),
         course: json.child('course').value.toString(),
         group: json.child('group').value.toString(),
-        // id: json.child('id').value as int,
+        id: json.child('id').value.toString(),
         isStudent: json.child('is_student').value as bool? ?? false,
+        personalInfo: json.child('personal_info').value as bool? ?? false,
       );
 }

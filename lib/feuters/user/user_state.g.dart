@@ -14,11 +14,23 @@ class _$UserState extends UserState {
   @override
   final String? course;
   @override
-  final int? id;
+  final String id;
   @override
   final bool isAdmin;
   @override
   final File? photo;
+  @override
+  final String? dataOfBirth;
+  @override
+  final String? roomNumber;
+  @override
+  final String? specialty;
+  @override
+  final String? floor;
+  @override
+  final int? prise;
+  @override
+  final int? paid;
 
   factory _$UserState([void Function(UserStateBuilder)? updates]) =>
       (new UserStateBuilder()..update(updates))._build();
@@ -27,11 +39,18 @@ class _$UserState extends UserState {
       {required this.name,
       this.group,
       this.course,
-      this.id,
+      required this.id,
       required this.isAdmin,
-      this.photo})
+      this.photo,
+      this.dataOfBirth,
+      this.roomNumber,
+      this.specialty,
+      this.floor,
+      this.prise,
+      this.paid})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(name, r'UserState', 'name');
+    BuiltValueNullFieldError.checkNotNull(id, r'UserState', 'id');
     BuiltValueNullFieldError.checkNotNull(isAdmin, r'UserState', 'isAdmin');
   }
 
@@ -51,7 +70,13 @@ class _$UserState extends UserState {
         course == other.course &&
         id == other.id &&
         isAdmin == other.isAdmin &&
-        photo == other.photo;
+        photo == other.photo &&
+        dataOfBirth == other.dataOfBirth &&
+        roomNumber == other.roomNumber &&
+        specialty == other.specialty &&
+        floor == other.floor &&
+        prise == other.prise &&
+        paid == other.paid;
   }
 
   @override
@@ -63,6 +88,12 @@ class _$UserState extends UserState {
     _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, isAdmin.hashCode);
     _$hash = $jc(_$hash, photo.hashCode);
+    _$hash = $jc(_$hash, dataOfBirth.hashCode);
+    _$hash = $jc(_$hash, roomNumber.hashCode);
+    _$hash = $jc(_$hash, specialty.hashCode);
+    _$hash = $jc(_$hash, floor.hashCode);
+    _$hash = $jc(_$hash, prise.hashCode);
+    _$hash = $jc(_$hash, paid.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -75,7 +106,13 @@ class _$UserState extends UserState {
           ..add('course', course)
           ..add('id', id)
           ..add('isAdmin', isAdmin)
-          ..add('photo', photo))
+          ..add('photo', photo)
+          ..add('dataOfBirth', dataOfBirth)
+          ..add('roomNumber', roomNumber)
+          ..add('specialty', specialty)
+          ..add('floor', floor)
+          ..add('prise', prise)
+          ..add('paid', paid))
         .toString();
   }
 }
@@ -95,9 +132,9 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
   String? get course => _$this._course;
   set course(String? course) => _$this._course = course;
 
-  int? _id;
-  int? get id => _$this._id;
-  set id(int? id) => _$this._id = id;
+  String? _id;
+  String? get id => _$this._id;
+  set id(String? id) => _$this._id = id;
 
   bool? _isAdmin;
   bool? get isAdmin => _$this._isAdmin;
@@ -106,6 +143,30 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
   File? _photo;
   File? get photo => _$this._photo;
   set photo(File? photo) => _$this._photo = photo;
+
+  String? _dataOfBirth;
+  String? get dataOfBirth => _$this._dataOfBirth;
+  set dataOfBirth(String? dataOfBirth) => _$this._dataOfBirth = dataOfBirth;
+
+  String? _roomNumber;
+  String? get roomNumber => _$this._roomNumber;
+  set roomNumber(String? roomNumber) => _$this._roomNumber = roomNumber;
+
+  String? _specialty;
+  String? get specialty => _$this._specialty;
+  set specialty(String? specialty) => _$this._specialty = specialty;
+
+  String? _floor;
+  String? get floor => _$this._floor;
+  set floor(String? floor) => _$this._floor = floor;
+
+  int? _prise;
+  int? get prise => _$this._prise;
+  set prise(int? prise) => _$this._prise = prise;
+
+  int? _paid;
+  int? get paid => _$this._paid;
+  set paid(int? paid) => _$this._paid = paid;
 
   UserStateBuilder();
 
@@ -118,6 +179,12 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
       _id = $v.id;
       _isAdmin = $v.isAdmin;
       _photo = $v.photo;
+      _dataOfBirth = $v.dataOfBirth;
+      _roomNumber = $v.roomNumber;
+      _specialty = $v.specialty;
+      _floor = $v.floor;
+      _prise = $v.prise;
+      _paid = $v.paid;
       _$v = null;
     }
     return this;
@@ -144,10 +211,16 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
                 name, r'UserState', 'name'),
             group: group,
             course: course,
-            id: id,
+            id: BuiltValueNullFieldError.checkNotNull(id, r'UserState', 'id'),
             isAdmin: BuiltValueNullFieldError.checkNotNull(
                 isAdmin, r'UserState', 'isAdmin'),
-            photo: photo);
+            photo: photo,
+            dataOfBirth: dataOfBirth,
+            roomNumber: roomNumber,
+            specialty: specialty,
+            floor: floor,
+            prise: prise,
+            paid: paid);
     replace(_$result);
     return _$result;
   }
