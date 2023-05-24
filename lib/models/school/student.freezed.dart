@@ -20,12 +20,12 @@ Student _$StudentFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Student {
-  String get dataOfBirth => throw _privateConstructorUsedError;
-  String get roomNumber => throw _privateConstructorUsedError;
-  String? get course => throw _privateConstructorUsedError;
+  String? get dataOfBirth => throw _privateConstructorUsedError;
+  String? get roomNumber => throw _privateConstructorUsedError;
+  int? get course => throw _privateConstructorUsedError;
   String get specialty => throw _privateConstructorUsedError;
   String get fullName => throw _privateConstructorUsedError;
-  String get floor => throw _privateConstructorUsedError;
+  String? get floor => throw _privateConstructorUsedError;
   int? get prise => throw _privateConstructorUsedError;
   int? get paid => throw _privateConstructorUsedError;
 
@@ -40,12 +40,12 @@ abstract class $StudentCopyWith<$Res> {
       _$StudentCopyWithImpl<$Res, Student>;
   @useResult
   $Res call(
-      {String dataOfBirth,
-      String roomNumber,
-      String? course,
+      {String? dataOfBirth,
+      String? roomNumber,
+      int? course,
       String specialty,
       String fullName,
-      String floor,
+      String? floor,
       int? prise,
       int? paid});
 }
@@ -63,28 +63,28 @@ class _$StudentCopyWithImpl<$Res, $Val extends Student>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? dataOfBirth = null,
-    Object? roomNumber = null,
+    Object? dataOfBirth = freezed,
+    Object? roomNumber = freezed,
     Object? course = freezed,
     Object? specialty = null,
     Object? fullName = null,
-    Object? floor = null,
+    Object? floor = freezed,
     Object? prise = freezed,
     Object? paid = freezed,
   }) {
     return _then(_value.copyWith(
-      dataOfBirth: null == dataOfBirth
+      dataOfBirth: freezed == dataOfBirth
           ? _value.dataOfBirth
           : dataOfBirth // ignore: cast_nullable_to_non_nullable
-              as String,
-      roomNumber: null == roomNumber
+              as String?,
+      roomNumber: freezed == roomNumber
           ? _value.roomNumber
           : roomNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       course: freezed == course
           ? _value.course
           : course // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       specialty: null == specialty
           ? _value.specialty
           : specialty // ignore: cast_nullable_to_non_nullable
@@ -93,10 +93,10 @@ class _$StudentCopyWithImpl<$Res, $Val extends Student>
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String,
-      floor: null == floor
+      floor: freezed == floor
           ? _value.floor
           : floor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       prise: freezed == prise
           ? _value.prise
           : prise // ignore: cast_nullable_to_non_nullable
@@ -117,12 +117,12 @@ abstract class _$$_StudentCopyWith<$Res> implements $StudentCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String dataOfBirth,
-      String roomNumber,
-      String? course,
+      {String? dataOfBirth,
+      String? roomNumber,
+      int? course,
       String specialty,
       String fullName,
-      String floor,
+      String? floor,
       int? prise,
       int? paid});
 }
@@ -137,28 +137,28 @@ class __$$_StudentCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? dataOfBirth = null,
-    Object? roomNumber = null,
+    Object? dataOfBirth = freezed,
+    Object? roomNumber = freezed,
     Object? course = freezed,
     Object? specialty = null,
     Object? fullName = null,
-    Object? floor = null,
+    Object? floor = freezed,
     Object? prise = freezed,
     Object? paid = freezed,
   }) {
     return _then(_$_Student(
-      dataOfBirth: null == dataOfBirth
+      dataOfBirth: freezed == dataOfBirth
           ? _value.dataOfBirth
           : dataOfBirth // ignore: cast_nullable_to_non_nullable
-              as String,
-      roomNumber: null == roomNumber
+              as String?,
+      roomNumber: freezed == roomNumber
           ? _value.roomNumber
           : roomNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       course: freezed == course
           ? _value.course
           : course // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       specialty: null == specialty
           ? _value.specialty
           : specialty // ignore: cast_nullable_to_non_nullable
@@ -167,10 +167,10 @@ class __$$_StudentCopyWithImpl<$Res>
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String,
-      floor: null == floor
+      floor: freezed == floor
           ? _value.floor
           : floor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       prise: freezed == prise
           ? _value.prise
           : prise // ignore: cast_nullable_to_non_nullable
@@ -187,12 +187,12 @@ class __$$_StudentCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Student extends _Student {
   _$_Student(
-      {required this.dataOfBirth,
-      required this.roomNumber,
-      required this.course,
+      {this.dataOfBirth,
+      this.roomNumber,
+      this.course,
       required this.specialty,
       required this.fullName,
-      required this.floor,
+      this.floor,
       required this.prise,
       required this.paid})
       : super._();
@@ -201,17 +201,17 @@ class _$_Student extends _Student {
       _$$_StudentFromJson(json);
 
   @override
-  final String dataOfBirth;
+  final String? dataOfBirth;
   @override
-  final String roomNumber;
+  final String? roomNumber;
   @override
-  final String? course;
+  final int? course;
   @override
   final String specialty;
   @override
   final String fullName;
   @override
-  final String floor;
+  final String? floor;
   @override
   final int? prise;
   @override
@@ -262,12 +262,12 @@ class _$_Student extends _Student {
 
 abstract class _Student extends Student {
   factory _Student(
-      {required final String dataOfBirth,
-      required final String roomNumber,
-      required final String? course,
+      {final String? dataOfBirth,
+      final String? roomNumber,
+      final int? course,
       required final String specialty,
       required final String fullName,
-      required final String floor,
+      final String? floor,
       required final int? prise,
       required final int? paid}) = _$_Student;
   _Student._() : super._();
@@ -275,17 +275,17 @@ abstract class _Student extends Student {
   factory _Student.fromJson(Map<String, dynamic> json) = _$_Student.fromJson;
 
   @override
-  String get dataOfBirth;
+  String? get dataOfBirth;
   @override
-  String get roomNumber;
+  String? get roomNumber;
   @override
-  String? get course;
+  int? get course;
   @override
   String get specialty;
   @override
   String get fullName;
   @override
-  String get floor;
+  String? get floor;
   @override
   int? get prise;
   @override

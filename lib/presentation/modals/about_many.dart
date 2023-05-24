@@ -91,7 +91,7 @@ class AboutManyForTeacher extends HookWidget {
                                   return (student.fullName
                                               .toLowerCase()
                                               .contains(searchString.value) ||
-                                          student.roomNumber
+                                          student.roomNumber!
                                               .contains(searchString.value))
                                       ? Column(
                                           children: [

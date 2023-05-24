@@ -7,24 +7,28 @@ part 'student.g.dart';
 @freezed
 class Student with _$Student {
   factory Student({
-    required String dataOfBirth,
-    required String roomNumber,
-    required String? course,
+    String? dataOfBirth,
+    String? roomNumber,
+    int? course,
     required String specialty,
     required String fullName,
-    required String floor,
+    String? floor,
     required int? prise,
     required int? paid,
   }) = _Student;
 
   const Student._();
 
-  factory Student.fromJson(Map<String, dynamic> json) =>
-      _$StudentFromJson(json);
+  factory Student.fromJson(Map<String, dynamic> json) => Student(
+      course: json['Курс'],
+      specialty: json['Специальность'],
+      fullName: json['ФИО'],
+      prise: json['Начисление'],
+      paid: json['Оплата']);
 
   factory Student.fromSnapshot(DataSnapshot json) => Student(
         roomNumber: json.child('Комнанта').value.toString(),
-        course: json.child('Курс').value.toString(),
+        course: json.child('Курс').value as int?,
         dataOfBirth: json.child('Год рождения').value.toString(),
         floor: json.child('Этаж').value.toString(),
         fullName: json.child('ФИО').value.toString(),

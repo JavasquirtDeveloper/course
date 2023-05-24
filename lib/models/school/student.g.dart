@@ -7,12 +7,12 @@ part of 'student.dart';
 // **************************************************************************
 
 _$_Student _$$_StudentFromJson(Map<String, dynamic> json) => _$_Student(
-      dataOfBirth: json['dataOfBirth'] as String,
-      roomNumber: json['roomNumber'] as String,
-      course: json['course'] as String?,
+      dataOfBirth: json['dataOfBirth'] as String?,
+      roomNumber: json['roomNumber'] as String?,
+      course: json['course'] as int?,
       specialty: json['specialty'] as String,
       fullName: json['fullName'] as String,
-      floor: json['floor'] as String,
+      floor: json['floor'] as String?,
       prise: json['prise'] as int?,
       paid: json['paid'] as int?,
     );
