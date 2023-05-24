@@ -25,6 +25,7 @@ class CalendarPage extends HookWidget {
               firstDay.value.year,
               firstDay.value.month,
             ).add(Duration(days: i)));
+
     onAddDays() {
       selectedDays.value = currentMoth
           .map(

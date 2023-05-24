@@ -3,6 +3,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app_router.dart';
 import 'package:flutter_application_1/models/school/student.dart';
+import 'package:flutter_application_1/presentation/modals/about_rooms.dart';
 import 'package:flutter_application_1/store/global_state_hook.dart';
 import 'package:flutter_application_1/widgets/default_button.dart';
 import 'package:flutter_application_1/widgets/input.dart';
@@ -124,86 +125,6 @@ class AboutManyForTeacher extends HookWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class AboutRooms extends StatelessWidget {
-  const AboutRooms({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 34),
-      children: const [
-        Text('1 курс:'),
-        ExpansionTile(
-          title: Text('БАТ'),
-        ),
-        ExpansionTile(
-          title: Text('БУС'),
-        ),
-        ExpansionTile(
-          title: Text('БМА'),
-        ),
-        ExpansionTile(
-          title: Text('ББПэ'),
-        ),
-        ExpansionTile(
-          title: Text('БТС'),
-        ),
-        SizedBox(height: 30),
-        Text('2 курс:'),
-        ExpansionTile(
-          title: Text('БАТ'),
-        ),
-        ExpansionTile(
-          title: Text('БУС'),
-        ),
-        ExpansionTile(
-          title: Text('БМА'),
-        ),
-        ExpansionTile(
-          title: Text('ББПэ'),
-        ),
-        ExpansionTile(
-          title: Text('БТС'),
-        ),
-        SizedBox(height: 30),
-        Text('3 курс:'),
-        ExpansionTile(
-          title: Text('БАТ'),
-        ),
-        ExpansionTile(
-          title: Text('БУС'),
-        ),
-        ExpansionTile(
-          title: Text('БМА'),
-        ),
-        ExpansionTile(
-          title: Text('ББПэ'),
-        ),
-        ExpansionTile(
-          title: Text('БТС'),
-        ),
-        SizedBox(height: 30),
-        Text('4 курс:'),
-        ExpansionTile(
-          title: Text('БАТ'),
-        ),
-        ExpansionTile(
-          title: Text('БУС'),
-        ),
-        ExpansionTile(
-          title: Text('БМА'),
-        ),
-        ExpansionTile(
-          title: Text('ББПэ'),
-        ),
-        ExpansionTile(
-          title: Text('БТС'),
-        ),
-      ],
     );
   }
 }

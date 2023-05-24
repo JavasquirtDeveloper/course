@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/feuters/user/actions/login_action.dart';
 import 'package:flutter_application_1/models/school/student.dart';
 import 'package:flutter_application_1/presentation/calendar_page.dart';
-import 'package:flutter_application_1/presentation/home_page.dart';
 import 'package:flutter_application_1/presentation/hooks/dispatcher_hook.dart';
 import 'package:flutter_application_1/presentation/menu_page.dart';
 import 'package:flutter_application_1/presentation/search_page.dart';
@@ -41,11 +40,7 @@ class MainPage extends HookWidget {
     );
 
     final index = useState(0);
-    final tabs = [
-      const CalendarPage(),
-      const SearchPage(),
-      const MenuPage()
-    ];
+    final tabs = [const CalendarPage(), const SearchPage(), const MenuPage()];
 
     return Scaffold(
       body: IndexedStack(
@@ -54,19 +49,19 @@ class MainPage extends HookWidget {
       ),
       bottomNavigationBar: BottomAppBar(
         child: Row(children: [
-          BarIcon(icon: Icons.calendar_month, onTap: () => index.value = 0),
+          _BarIcon(icon: Icons.calendar_month, onTap: () => index.value = 0),
           isAdmin
-              ? BarIcon(icon: Icons.search, onTap: () => index.value = 1)
+              ? _BarIcon(icon: Icons.search, onTap: () => index.value = 1)
               : const SizedBox(),
-          BarIcon(icon: Icons.menu, onTap: () => index.value = 2),
+          _BarIcon(icon: Icons.menu, onTap: () => index.value = 2),
         ]),
       ),
     );
   }
 }
 
-class BarIcon extends StatelessWidget {
-  const BarIcon({
+class _BarIcon extends StatelessWidget {
+  const _BarIcon({
     required this.icon,
     required this.onTap,
     Key? key,

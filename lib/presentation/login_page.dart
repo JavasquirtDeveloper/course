@@ -7,6 +7,7 @@ import 'package:flutter_application_1/presentation/main_page.dart';
 import 'package:flutter_application_1/presentation/register_page.dart';
 import 'package:flutter_application_1/widgets/default_button.dart';
 import 'package:flutter_application_1/widgets/input.dart';
+import 'package:flutter_application_1/widgets/text_with_box.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class LoginPage extends HookWidget {

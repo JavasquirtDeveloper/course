@@ -16,18 +16,13 @@ class AboutSharaga extends StatelessWidget {
           final json = snapshot;
           final message = Room.fromSnapshot(json);
 
-          getFreePlace() {
-            message.freeBeds != message.busyBeds;
-            return message.freeBeds;
-          }
-
           return int.parse(message.freeBeds) > 0
               ? Column(
                   children: [
                     const SizedBox(height: 8),
                     Text('Номер комнаты: ${message.roomNumber}'),
                     const SizedBox(height: 8),
-                    Text('Свободных кроватей: ${getFreePlace()}'),
+                    Text('Свободных кроватей: ${message.freeBeds}'),
                     const SizedBox(height: 8),
                     Text('Кол-во мест: ${message.placeCount}'),
                     const Divider(
