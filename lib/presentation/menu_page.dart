@@ -4,6 +4,7 @@ import 'package:flutter_application_1/presentation/modals/about_many.dart';
 import 'package:flutter_application_1/presentation/modals/about_sharaga.dart';
 import 'package:flutter_application_1/presentation/modals/bid_modal.dart';
 import 'package:flutter_application_1/presentation/modals/settings_modal.dart';
+import 'package:flutter_application_1/presentation/modals/student_rooms.dart';
 import 'package:flutter_application_1/store/global_state_hook.dart';
 import 'package:flutter_application_1/widgets/default_button.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -82,6 +83,16 @@ class MenuPage extends HookWidget {
                 ),
               ),
               const SizedBox(height: 15),
+              if (user.isAdmin) ...[
+                DefaultButton(
+                  text: 'Заселение',
+                  onPressed: () => appRouter.openBottomSheet(
+                    context: context,
+                    child: const StudentRooms(),
+                  ),
+                ),
+                const SizedBox(height: 15),
+              ],
               DefaultButton(
                 text: 'Настройки',
                 onPressed: () => appRouter.openBottomSheet(
