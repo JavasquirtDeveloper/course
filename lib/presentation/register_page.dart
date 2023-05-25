@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app_router.dart';
-import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/feuters/user/actions/create_user_action.dart';
+import 'package:flutter_application_1/models/user/user.dart';
 import 'package:flutter_application_1/presentation/hooks/dispatcher_hook.dart';
 import 'package:flutter_application_1/presentation/main_page.dart';
 import 'package:flutter_application_1/widgets/default_button.dart';
@@ -15,8 +15,6 @@ class RegisterPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final database = FirebaseDatabase.instance.ref('users');
-
     final isStudent = useState(false);
     final isPersonalInfo = useState(false);
     final dispatcher = useDispatcher();
@@ -30,31 +28,25 @@ class RegisterPage extends HookWidget {
     final loginText = useState('');
     final passText = useState('');
 
-
-
     final fieldsIsEmpty =
         loginText.value.length < 6 || passText.value.length < 6;
 
-    Future signUp() async {
+    signUp() {
       try {
-        await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-              email: loginController.text,
-              password: passController.text,
-            )
-            .then((value) => database.child(value.user!.uid).set({
-                  'login': loginController.text,
-                  'id': value.user!.uid,
-                  'pass': passController.text,
-                  'is_student': isStudent.value,
-                  'name': nameController.text,
-                  'group': isStudent.value ? groupController.text : null,
-                  'course': isStudent.value ? courseController.text : null,
-                  'personal_info': isPersonalInfo.value,
-                }).then((value) => appRouter.startWith(const MainPage())));
+        dispatcher(CreateUserAction(
+          email: loginController.text,
+          pass: passController.text,
+          user: User(
+            name: nameController.text,
+            course: isStudent.value ? groupController.text : null,
+            group: isStudent.value ? groupController.text : null,
+            isStudent: isStudent.value,
+            personalInfo: isPersonalInfo.value,
+          ),
+        )).then((value) => appRouter.startWith(const MainPage()));
       } catch (e) {
         appRouter.openBottomSheet(
-            context: context, child: const Text('Ощибка'));
+            context: context, child: const Text('Ошибка'));
       }
     }
 

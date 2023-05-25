@@ -12,7 +12,7 @@ class User with _$User {
     required String? group,
     required bool isStudent,
     required bool personalInfo,
-    required String id,
+    String? id,
     String? dataOfBirth,
     String? roomNumber,
     String? specialty,

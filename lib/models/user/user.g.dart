@@ -12,7 +12,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       group: json['group'] as String?,
       isStudent: json['isStudent'] as bool,
       personalInfo: json['personalInfo'] as bool,
-      id: json['id'] as String,
+      id: json['id'] as String?,
       dataOfBirth: json['dataOfBirth'] as String?,
       roomNumber: json['roomNumber'] as String?,
       specialty: json['specialty'] as String?,

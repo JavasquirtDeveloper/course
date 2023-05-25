@@ -25,7 +25,7 @@ mixin _$User {
   String? get group => throw _privateConstructorUsedError;
   bool get isStudent => throw _privateConstructorUsedError;
   bool get personalInfo => throw _privateConstructorUsedError;
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String? get dataOfBirth => throw _privateConstructorUsedError;
   String? get roomNumber => throw _privateConstructorUsedError;
   String? get specialty => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $UserCopyWith<$Res> {
       String? group,
       bool isStudent,
       bool personalInfo,
-      String id,
+      String? id,
       String? dataOfBirth,
       String? roomNumber,
       String? specialty,
@@ -76,7 +76,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? group = freezed,
     Object? isStudent = null,
     Object? personalInfo = null,
-    Object? id = null,
+    Object? id = freezed,
     Object? dataOfBirth = freezed,
     Object? roomNumber = freezed,
     Object? specialty = freezed,
@@ -105,10 +105,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.personalInfo
           : personalInfo // ignore: cast_nullable_to_non_nullable
               as bool,
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       dataOfBirth: freezed == dataOfBirth
           ? _value.dataOfBirth
           : dataOfBirth // ignore: cast_nullable_to_non_nullable
@@ -149,7 +149,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? group,
       bool isStudent,
       bool personalInfo,
-      String id,
+      String? id,
       String? dataOfBirth,
       String? roomNumber,
       String? specialty,
@@ -172,7 +172,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? group = freezed,
     Object? isStudent = null,
     Object? personalInfo = null,
-    Object? id = null,
+    Object? id = freezed,
     Object? dataOfBirth = freezed,
     Object? roomNumber = freezed,
     Object? specialty = freezed,
@@ -201,10 +201,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.personalInfo
           : personalInfo // ignore: cast_nullable_to_non_nullable
               as bool,
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       dataOfBirth: freezed == dataOfBirth
           ? _value.dataOfBirth
           : dataOfBirth // ignore: cast_nullable_to_non_nullable
@@ -242,7 +242,7 @@ class _$_User extends _User {
       required this.group,
       required this.isStudent,
       required this.personalInfo,
-      required this.id,
+      this.id,
       this.dataOfBirth,
       this.roomNumber,
       this.specialty,
@@ -264,7 +264,7 @@ class _$_User extends _User {
   @override
   final bool personalInfo;
   @override
-  final String id;
+  final String? id;
   @override
   final String? dataOfBirth;
   @override
@@ -333,7 +333,7 @@ abstract class _User extends User {
       required final String? group,
       required final bool isStudent,
       required final bool personalInfo,
-      required final String id,
+      final String? id,
       final String? dataOfBirth,
       final String? roomNumber,
       final String? specialty,
@@ -355,7 +355,7 @@ abstract class _User extends User {
   @override
   bool get personalInfo;
   @override
-  String get id;
+  String? get id;
   @override
   String? get dataOfBirth;
   @override
